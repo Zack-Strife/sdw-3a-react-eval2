@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import logo from './shirobako.gif';
 import './App.css';
 import 'whatwg-fetch';
 import Users from './components/users';
-import Delete from './components/delete';
+import Projects from './components/projects';
+import AddUser from './components/addUser';
+import AddProject from './components/addProject';
+
 
 class App extends Component {
   constructor(props) {
     super(props);
       this.state = {
-      users: []
+      users: [],
+      projects: []
     };
   }
 
@@ -18,11 +22,21 @@ class App extends Component {
     .then(function(response) {
       return response.json()
     }).then((json) => {
-      console.log(json);
       this.setState({
           users: json
         });
-      console.log(this.state.users)
+      }).catch(function(ex) {
+        'Fail'
+      })
+
+      fetch('https://kickass-sdw-3a.herokuapp.com/api/projects/')
+    .then(function(response) {
+      return response.json()
+    }).then((json) => {
+      this.setState({
+          projects: json
+        });
+      console.log(json)
       }).catch(function(ex) {
         'Fail'
       })
@@ -33,13 +47,18 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+          <h2>Welcome to my app</h2>
         </div>
         <br/>
         <div>
-          <h2>Afficher les users</h2>
-          <Users users={this.state.users} />
+          <AddUser/>
+          <AddProject/>
+          <h2>Show users</h2>
+          <Users users={this.state.users}/>
+          <h2>Show projects</h2>
+          <Projects projects={this.state.projects}/>
         </div>
+         
       </div>
     );
   }

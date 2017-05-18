@@ -5,19 +5,15 @@ export default class users extends React.Component {
     name: React.PropTypes.string,
   };
 
-  constructor(props) {
-    super(props);
-    console.log('hey', props);
-  }
   render() {
     return (
-      <div>
+      <div className="data-panel">
 	  	  {
 	        this.props.users.map( item => (
-	        <ul className="list">
-	            <li> Name : {item.name}</li>
-	            <li>Age : {item.age}</li>
-	            <li>Type : {item.type}</li>
+	        <ul className="list-group">
+	            <li className="list-group-item"> Name : {item.name}</li>
+	            <li className="list-group-item">Age : {item.age}</li>
+	            <li className="list-group-item">Type : {item.type}</li>
 	        </ul>
 	        ))
 	      }
